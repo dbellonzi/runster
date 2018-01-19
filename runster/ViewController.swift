@@ -16,6 +16,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     @IBOutlet weak var splitTable: UITableView!
     @IBOutlet weak var currentTime: UILabel!
     @IBOutlet weak var currentDistance: UILabel!
+    @IBOutlet weak var startButton: UIButton!
     
     //Stopwatch Value
     var isRunner: Bool = false
@@ -109,7 +110,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
             sender.setTitle("Start", for: UIControlState.normal)
             timer?.invalidate()
         } else {
-            location = currentLocation
             isRunner = true
             sender.setTitle("Stop", for: UIControlState.normal)
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
@@ -117,6 +117,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
                 self.splitTime += 1
                 self.loadViewData()
             })
+            location = currentLocation
         }
     }
     
@@ -132,26 +133,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     //Reset Button
     @IBAction func resetButton(_ sender: UIButton) {
-        if isRunner {
-            isRunner = false
-            sender.setTitle("Start", for: UIControlState.normal)
-            timer?.invalidate()
+        if !isRunner {
+            totalDistance = 0.0
+            time = 0
+            splitDist = []
+            splitTimes = []
+            loadViewData()
+            loadTable()
         }
-        totalDistance = 0.0
-        time = 0
-        splitDist = []
-        splitTimes = []
-        loadTable()
-        loadViewData()
+
     }
     
     //Load View
     func loadViewData() {
-        currentTime.text = String(self.time)
-        currentDistance.text = String(self.totalDistance)
+        if time%60 < 10 {
+            currentTime.text = String("\(time/60):0\(time%60)")
+            currentDistance.text = String(format: "%.0f", totalDistance)
+        } else {
+            currentTime.text = String("\(time/60):\(time%60)")
+            currentDistance.text = String(format: "%.0f", totalDistance)
+        }
     }
     
     func loadTable() {
+        print(splitDist,splitTimes)
         splitTable.reloadData()
     }
     
@@ -162,7 +167,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
-        cell.textLabel?.text = String(splitTimes[indexPath.row])
-        cell.detailTextLabel?.text = String(splitDist[indexPath.row])
+        cell.textLabel?.text = String("\(splitTimes[indexPath.row]/60):\(splitTimes[indexPath.row]%60)")
+        cell.detailTextLabel?.text = String(format: "%.0f", splitDist[indexPath.row])
         return cell
     }}

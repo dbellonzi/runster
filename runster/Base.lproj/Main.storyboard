@@ -95,7 +95,6 @@
                                 <state key="normal" title="reset"/>
                                 <connections>
                                     <action selector="resetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PcX-Y4-LOk"/>
-                                    <action selector="splitTimeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GDN-Xf-Lmp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -116,6 +115,7 @@
                         <outlet property="currentDistance" destination="ZYS-cS-w79" id="Qde-et-P1e"/>
                         <outlet property="currentTime" destination="Q2b-PO-R5S" id="IbQ-6Z-fFK"/>
                         <outlet property="splitTable" destination="nZW-XU-gnn" id="Va8-CD-hNa"/>
+                        <outlet property="startButton" destination="5oB-k0-aPY" id="gT1-Am-vwZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
