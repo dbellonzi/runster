@@ -135,7 +135,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     @IBAction func resetButton(_ sender: UIButton) {
         if !isRunner {
             totalDistance = 0.0
+            splitDistance = 0.0
             time = 0
+            splitTime = 0
             splitDist = []
             splitTimes = []
             loadViewData()
@@ -167,7 +169,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
-        cell.textLabel?.text = String("\(splitTimes[indexPath.row]/60):\(splitTimes[indexPath.row]%60)")
-        cell.detailTextLabel?.text = String(format: "%.0f", splitDist[indexPath.row])
+        if splitTimes[indexPath.row]%60 < 10 {
+            cell.textLabel?.text = String("\(splitTimes[indexPath.row]/60):0\(splitTimes[indexPath.row]%60)")
+        } else {
+            cell.textLabel?.text = String("\(splitTimes[indexPath.row]/60):\(splitTimes[indexPath.row]%60)")
+        }
+            cell.detailTextLabel?.text = String(format: "%.0f", splitDist[indexPath.row])
         return cell
     }}
