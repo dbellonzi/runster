@@ -13,17 +13,18 @@ import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
-    @IBOutlet weak var splitTime: UILabel!
-    @IBOutlet weak var splitDistance: UILabel!
+    @IBOutlet weak var splitTable: UITableView!
+
     @IBOutlet weak var currentTime: UILabel!
     @IBOutlet weak var currentDistance: UILabel!
     var run = [RunDistance]()
     var totalDistance: Double = 0.0
+    var totalsplitDistance: Double = 0.0
     var isRunner: Bool = false
 //    var lastMarkedLocation = [String: Double]()
 //    var lastRunLocation = [String: Double]()
     var currentLocation: CLLocation?
-    var locationA: CLLocation?
+    var location: CLLocation?
     
     let locationManager = CLLocationManager()
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -79,7 +80,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func enableMyWhenInUseFeatures(){
         print("enableMyWhenInUseFeaatures")
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 5  // In meters.
+        locationManager.distanceFilter = 1  // In meters.
         locationManager.startUpdatingLocation()
     }
     
@@ -97,22 +98,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,  didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations.last!
         if isRunner {
-            self.totalDistance += (currentLocation?.distance(from: locationA!))!
-            locationA = currentLocation
+            self.totalDistance += (currentLocation?.distance(from: location!))!
             currentDistance.text = String(format: "%.2f", totalDistance)
+            self.totalsplitDistance += (currentLocation?.distance(from: location!))!
+            splitDistance.text = String(format: "%.2f", totalsplitDistance)
         }
-
-//        self.currentLocation["latitude"] = lastLocation.coordinate.latitude
-//        self.currentLocation["longitude"] = lastLocation.coordinate.longitude
-//        print(currentLocation)
-        
-        // Do something with the location.
+        location = currentLocation
     }
     
     @IBAction func markLocation(_ sender: UIButton) {
-        locationA = currentLocation
-        isRunner = true
+        if isRunner {
+            isRunner = false
+            sender.setTitle("Start", for: UIControlState.normal)
+        } else {
+            totalDistance = 0.0
+            totalsplitDistance = 0.0
+            location = currentLocation
+            isRunner = true
+            sender.setTitle("Stop", for: UIControlState.normal)
+        }
     }
     @IBAction func splitTimeButton(_ sender: Any) {
+        totalsplitDistance = 0.0
+    }
+    
+    @IBAction func resetButton(_ sender: UIButton) {
     }
 }
