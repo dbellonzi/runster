@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,26 +15,85 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="runster" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SBl-E2-gOl">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oB-k0-aPY">
+                                <rect key="frame" x="72" y="49" width="50" height="30"/>
+                                <color key="backgroundColor" red="0.041681021149999997" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7Xn-3I-MRf"/>
+                                    <constraint firstAttribute="width" constant="50" id="TtX-dS-584"/>
+                                </constraints>
+                                <state key="normal" title="statr"/>
+                                <connections>
+                                    <action selector="markLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bzh-E5-gfB"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="totalDistance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYS-cS-w79">
+                                <rect key="frame" x="0.0" y="146" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dlI-8S-egC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="splitDistance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyD-OC-fPn">
+                                <rect key="frame" x="16" y="383" width="99" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="splitTime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toC-zp-47s">
+                                <rect key="frame" x="16" y="498" width="70" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGy-5U-olR">
+                                <rect key="frame" x="194" y="48" width="50" height="30"/>
+                                <color key="backgroundColor" red="0.041681021149999997" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="OyT-hP-amE"/>
+                                    <constraint firstAttribute="width" constant="50" id="PMo-Vm-z8r"/>
+                                </constraints>
+                                <state key="normal" title="split"/>
+                                <connections>
+                                    <action selector="markLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lK9-3p-tWS"/>
+                                    <action selector="splitTimeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vF6-9A-D5O"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="totalTime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2b-PO-R5S">
+                                <rect key="frame" x="16" y="274" width="72" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="SBl-E2-gOl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Nai-8V-5Sq"/>
-                            <constraint firstItem="SBl-E2-gOl" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="RqZ-bd-hKa"/>
-                            <constraint firstItem="SBl-E2-gOl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bdQ-C6-5ER"/>
-                            <constraint firstItem="SBl-E2-gOl" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="jsC-sk-GsL"/>
+                            <constraint firstItem="ZYS-cS-w79" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3OV-dW-fH5"/>
+                            <constraint firstItem="5oB-k0-aPY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="82" id="Ldq-kZ-Nud"/>
+                            <constraint firstItem="5oB-k0-aPY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="66" id="Qun-3P-VqA"/>
+                            <constraint firstItem="ZYS-cS-w79" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dR2-fW-9Pc"/>
+                            <constraint firstItem="ZYS-cS-w79" firstAttribute="top" secondItem="5oB-k0-aPY" secondAttribute="bottom" constant="15" id="pKb-7L-oiu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="currentDistance" destination="ZYS-cS-w79" id="Qde-et-P1e"/>
+                        <outlet property="currentTime" destination="Q2b-PO-R5S" id="IbQ-6Z-fFK"/>
+                        <outlet property="splitDistance" destination="yyD-OC-fPn" id="WcY-Hg-XH2"/>
+                        <outlet property="splitTime" destination="toC-zp-47s" id="Uuv-So-GBf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
+            <point key="canvasLocation" x="1046" y="-36"/>
         </scene>
     </scenes>
 </document>

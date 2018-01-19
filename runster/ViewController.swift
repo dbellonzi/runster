@@ -7,12 +7,26 @@
 //
 
 import UIKit
+import CoreData
 import CoreLocation
 import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
+    @IBOutlet weak var splitTime: UILabel!
+    @IBOutlet weak var splitDistance: UILabel!
+    @IBOutlet weak var currentTime: UILabel!
+    @IBOutlet weak var currentDistance: UILabel!
+    var run = [RunDistance]()
+    var totalDistance: Double = 0.0
+    var isRunner: Bool = false
+//    var lastMarkedLocation = [String: Double]()
+//    var lastRunLocation = [String: Double]()
+    var currentLocation: CLLocation?
+    var locationA: CLLocation?
+    
     let locationManager = CLLocationManager()
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,16 +79,40 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func enableMyWhenInUseFeatures(){
         print("enableMyWhenInUseFeaatures")
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 100.0  // In meters.
+        locationManager.distanceFilter = 5  // In meters.
         locationManager.startUpdatingLocation()
+    }
+    
+    func openRun() {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "RunDistance")
+        do {
+            let result = try managedObjectContext.fetch(request)
+            run = result as! [RunDistance]
+        } catch {
+            print("\(error)")
+        }
     }
     
     //call location
     func locationManager(_ manager: CLLocationManager,  didUpdateLocations locations: [CLLocation]) {
-        let lastLocation = locations.last!
-        print(lastLocation)
+        currentLocation = locations.last!
+        if isRunner {
+            self.totalDistance += (currentLocation?.distance(from: locationA!))!
+            locationA = currentLocation
+            currentDistance.text = String(format: "%.2f", totalDistance)
+        }
+
+//        self.currentLocation["latitude"] = lastLocation.coordinate.latitude
+//        self.currentLocation["longitude"] = lastLocation.coordinate.longitude
+//        print(currentLocation)
         
         // Do something with the location.
     }
     
+    @IBAction func markLocation(_ sender: UIButton) {
+        locationA = currentLocation
+        isRunner = true
+    }
+    @IBAction func splitTimeButton(_ sender: Any) {
+    }
 }
